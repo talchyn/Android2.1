@@ -1,0 +1,110 @@
+<html>
+<head>
+<title>MainOnBoardFragment.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6897bb;}
+.s3 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MainOnBoardFragment.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.android2.ui.fragments.onboard.main</span>
+
+<span class="s1">import android.annotation.SuppressLint</span>
+<span class="s1">import android.os.Bundle</span>
+<span class="s1">import androidx.fragment.app.Fragment</span>
+<span class="s1">import android.view.LayoutInflater</span>
+<span class="s1">import android.view.View</span>
+<span class="s1">import android.view.ViewGroup</span>
+<span class="s1">import androidx.navigation.fragment.findNavController</span>
+<span class="s1">import com.example.android2.R</span>
+<span class="s1">import com.example.android2.databinding.FragmentMainOnBoardBinding</span>
+<span class="s1">import com.example.android2.ui.fragments.onboard.OnBoardFragmentDirections</span>
+
+<span class="s0">class </span><span class="s1">MainOnBoardFragment : Fragment() {</span>
+
+    <span class="s1">private lateinit </span><span class="s0">var </span><span class="s1">binding: FragmentMainOnBoardBinding</span>
+
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onCreateView(</span>
+        <span class="s1">inflater: LayoutInflater</span><span class="s0">, </span><span class="s1">container: ViewGroup?</span><span class="s0">,</span>
+        <span class="s1">savedInstanceState: Bundle?</span>
+    <span class="s1">): View? {</span>
+        <span class="s1">binding = FragmentMainOnBoardBinding.inflate(inflater</span><span class="s0">, </span><span class="s1">container</span><span class="s0">, false</span><span class="s1">)</span>
+        <span class="s0">return </span><span class="s1">binding.root</span>
+    <span class="s1">}</span>
+
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onViewCreated(view: View</span><span class="s0">, </span><span class="s1">savedInstanceState: Bundle?) {</span>
+        <span class="s0">super</span><span class="s1">.onViewCreated(view</span><span class="s0">, </span><span class="s1">savedInstanceState)</span>
+        <span class="s1">initialize()</span>
+    <span class="s1">}</span>
+
+    <span class="s1">private </span><span class="s0">fun </span><span class="s1">initialize() {</span>
+        <span class="s1">visibilityTextStartWork()</span>
+        <span class="s0">when </span><span class="s1">(requireArguments().getInt(AGE_ONBOARD_PAGE_POSITION)) {</span>
+            <span class="s2">0 </span><span class="s1">-&gt; {</span>
+                <span class="s1">binding.pagerText.text = </span><span class="s3">&quot;Очень удобный функционал&quot;</span>
+                <span class="s1">binding.pagerImage.setAnimation(</span><span class="s3">&quot;designer.json&quot;</span><span class="s1">)</span>
+                <span class="s1">binding</span>
+            <span class="s1">}</span>
+            <span class="s2">1 </span><span class="s1">-&gt; {</span>
+                <span class="s1">binding.pagerText.text = </span><span class="s3">&quot;Быстрый, качественный продукт&quot;</span>
+                <span class="s1">binding.pagerImage.setAnimation(</span><span class="s3">&quot;product.json&quot;</span><span class="s1">)</span>
+            <span class="s1">}</span>
+            <span class="s2">2 </span><span class="s1">-&gt; {</span>
+                <span class="s1">binding.pagerText.text = </span><span class="s3">&quot;Куча функций и интересных фишек&quot;</span>
+                <span class="s1">binding.pagerImage.setAnimation(</span><span class="s3">&quot;analysis.json&quot;</span><span class="s1">)</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@SuppressLint(</span><span class="s3">&quot;ResourceType&quot;</span><span class="s1">)</span>
+    <span class="s1">private </span><span class="s0">fun </span><span class="s1">visibilityTextStartWork() {</span>
+        <span class="s0">val </span><span class="s1">statusFragment = requireArguments().getInt(AGE_ONBOARD_PAGE_POSITION)</span>
+        <span class="s0">if</span><span class="s1">(statusFragment == </span><span class="s2">2</span><span class="s1">) {</span>
+            <span class="s1">binding.textBack.visibility = View.GONE</span>
+            <span class="s1">binding.pagerText.apply {</span>
+                <span class="s1">visibility = View.VISIBLE</span>
+                <span class="s1">setOnClickListener {</span>
+                    <span class="s1">findNavController().navigate(</span>
+                        <span class="s1">R.id.action_onBoardFragment_to_noteAppMainFragment</span>
+                    <span class="s1">)</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s0">else</span><span class="s1">{</span>
+            <span class="s1">binding.textBack.visibility = View.VISIBLE</span>
+            <span class="s1">binding.pagerImage.apply {</span>
+                <span class="s1">visibility = View.VISIBLE</span>
+                <span class="s1">setOnClickListener {</span>
+                    <span class="s1">findNavController().navigate(</span>
+                        <span class="s1">R.id.action_onBoardFragment_to_noteAppMainFragment</span>
+                    <span class="s1">)</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+
+
+    <span class="s1">companion </span><span class="s0">object </span><span class="s1">{</span>
+        <span class="s1">const </span><span class="s0">val </span><span class="s1">AGE_ONBOARD_PAGE_POSITION = </span><span class="s3">&quot;onboarding_page_position&quot;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">private </span><span class="s0">fun </span><span class="s1">initializeNoteApp() {</span>
+        <span class="s1">binding.textBack.setOnClickListener {</span>
+            <span class="s1">findNavController().navigate(</span>
+                <span class="s1">OnBoardFragmentDirections.actionOnBoardFragmentToNoteAppMainFragment()</span>
+            <span class="s1">)</span>
+        <span class="s1">}</span>
+
+    <span class="s1">}</span>
+<span class="s1">}</span></pre>
+</body>
+</html>
